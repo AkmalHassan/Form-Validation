@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Detail Center</h1>
+    <fieldset>
+      <legend>Company Registration</legend>
+      <form name="theform">
+        <table>
+          <tr>
+            <td>
+              <input
+                type="text"
+                id="fname"
+                placeholder="Enter First Name"
+                pattern=".{3,}"
+                oninput="pre()"
+                required
+              />
+            </td>
+            <td class="mrl">
+              <input
+                type="text"
+                id="lname"
+                class="mrl1"
+                pattern=".{3,}"
+                oninput="pree()"
+                placeholder="Enter Last Name"
+              />
+            </td>
+          </tr>
+          <tr id="errors">
+            <td>
+              <div id="erfn">Please enter more than 2 characters</div>
+            </td>
+            <td>
+              <div class="mrl1" id="erln">
+                Please enter more than 2 characters
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label>Date of birth:</label></td>
+            <td>
+              <input
+                type="date"
+                id="dob"
+                placeholder="Date of Birth"
+                required
+              />
+            </td>
+            <td colspan="3" style="display: flex">
+              <select id="gend" required>
+                <option disabled selected value="">Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Others</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                name="email"
+                class="email"
+                id="email"
+                pattern="[a-z0-9]+@gmail.com"
+                required
+              />
+              <div><p>Please enter your email correctly</p></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number:</td>
+            <td>
+              <input
+                type="tel"
+                pattern="^\+\d{1,3}"
+                id="code"
+                size="3"
+                placeholder="Code"
+                required
+              />
+              <input
+                type="tel"
+                id="teleNum"
+                placeholder="Phone Number"
+                maxlength="10"
+                size="11"
+                oninput="nc()"
+                required
+              />
+            </td>
+          </tr>
+          <tr id="errors">
+            <td></td>
+            <td>
+              <div id="erpn"><p>Please check your number</p></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="password"
+                pattern=".{6,}"
+                placeholder="New Password"
+                id="pass"
+                class="password"
+                oninput="pc()"
+                onKeyup="checkform()"
+                required
+              />
+            </td>
+          </tr>
+          <tr id="errors">
+            <td>
+              <div id="erps"><p>Please enter atleast 6 characters</p></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="password"
+                pattern=".{6,}"
+                placeholder="Confirm Password"
+                id="confPass"
+                class="password"
+                onKeyup="checkform()"
+                required
+              />
+            </td>
+          </tr>
+          <tr id="errors">
+            <td>
+              <div id="ercp"><p>Password not matching</p></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <input
+                type="submit"
+                name="submit"
+                id="sub"
+                onclick="chkr()"
+                disabled="disabled"
+              />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </fieldset>
+    <label>Name:</label><span id="fullname"></span><br /><br />
+    <label>Email:</label><span id="mail"></span><br /><br />
+    <label>Phone:</label><span id="phone"></span><br /><br />
+    <label>Gender:</label><span id="gen"></span><br /><br />
+
+    <script>
+      let pno = document.getElementById("teleNum");
+      let fn = document.getElementById("fname");
+      let ln = document.getElementById("lname");
+      let em = document.getElementById("email");
+      let co = document.getElementById("code");
+      let pn = document.getElementById("teleNum");
+      let g = document.getElementById("gend");
+      let pas = document.getElementById("pass");
+      let cpas = document.getElementById("confPass");
+      function pre() {
+        if (fn.value.length <= 2) {
+          document.getElementById("erfn").style.display = "block";
+        } else {
+          document.getElementById("erfn").style.display = "none";
+        }
+      }
+
+      function pree() {
+        if (ln.value.length <= 2) {
+          document.getElementById("erln").style.display = "block";
+        } else {
+          document.getElementById("erln").style.display = "none";
+        }
+      }
+
+      function nc() {
+        if (pno.value.length <= 9) {
+          document.getElementById("erpn").style.display = "block";
+        } else {
+          document.getElementById("erpn").style.display = "none";
+        }
+      }
+
+      function pc() {
+        if (pas.value.length <= 5) {
+          document.getElementById("erps").style.display = "block";
+        } else {
+          document.getElementById("erps").style.display = "none";
+        }
+      }
+      function chkr() {
+        event.preventDefault();
+
+        console.log(cpas.value);
+        console.log(pas.value);
+        if (cpas.value !== pas.value) {
+          document.getElementById("ercp").style.display = "block";
+        } else {
+          alert("ok");
+          document.getElementById("ercp").style.display = "none";
+        }
+        document.getElementById("fullname").textContent = fn.value.concat(
+          " ",
+          ln.value
+        );
+        document.getElementById("mail").textContent = em.value;
+        document.getElementById("phone").textContent = co.value.concat(
+          " ",
+          pn.value
+        );
+        document.getElementById("gen").textContent = g.value;
+      }
+      function checkform() {
+        var f = document.forms["theform"].elements;
+        var cansubmit = true;
+
+        for (var i = 0; i < f.length; i++) {
+          if (f[i].value.length == 0) cansubmit = false;
+        }
+
+        if (cansubmit) {
+          document.getElementById("sub").disabled = false;
+        }
+      }
+    </script>
+  </body>
+</html>

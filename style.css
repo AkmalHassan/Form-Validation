@@ -1,0 +1,29 @@
+
+/* *{
+    margin:0;
+    padding:0;
+} */
+
+tr#errors{
+    
+    font-size: 10px;
+    color: red;
+    font-style: italic;
+}
+div{
+    display: none;
+   
+}
+
+
+.mrl1{
+    margin-left: 15px;
+}
+/* #sub{
+    background-color: lightskyblue;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+ */
